@@ -4,12 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- ====================================================================================== -->
-    <!-- PERHATIAN MASTER SUTATO: JIKA INI UNTUK KLIEN (VERCEL), UBAH MANUAL KODE {{...}} DI BAWAH INI -->
-    <!-- Robot WhatsApp tidak bisa membaca JavaScript. Jadi saat deploy untuk klien, Anda WAJIB mengubah -->
-    <!-- kata {{KEYWORD_UTAMA}}, dll di blok <head> ini secara manual agar muncul di preview WA. -->
-    <!-- ====================================================================================== -->
-    
     <title>Paket Tour Jogja Bali 5D2N | Promo Flash Sale | Jogja Holiday</title>
     <meta name="description" content="Liburan magis Jogja ke Bali 5 Hari 2 Malam cuma Rp 1,5 Juta! All-Inclusive, bus mewah, tanpa biaya tersembunyi. Keberangkatan dari Jogja, Solo, Semarang & sekitarnya.">
     
@@ -21,8 +15,8 @@
     <meta property="og:type" content="website">
 
     <!-- SPEED & PERFORMANCE HOTFIX (PSI 100/100) -->
-    <!-- Preload gambar utama untuk Mobile dan Desktop -->
-    <link rel="preload" as="image" href="header-background.webp" fetchpriority="high">
+    <!-- Preload gambar utama untuk Mobile dan Desktop dengan type WebP agar mobile ngebut -->
+    <link rel="preload" as="image" href="header-background.webp" type="image/webp" fetchpriority="high">
     
     <!-- PRECONNECT GOOGLE FONTS UNTUK MENCEGAH CLS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -108,7 +102,6 @@
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         p { margin-bottom: 1.2rem; font-size: 0.95rem; }
         
-        /* Optimasi render area bawah yang tidak terlihat langsung */
         section { padding: 5rem 5%; content-visibility: auto; contain-intrinsic-size: 500px; }
         .container { max-width: 1200px; margin: 0 auto; }
         .text-center { text-align: center; }
@@ -160,13 +153,15 @@
         .testi-name { color: var(--text-main); font-weight: 700; font-size: 0.9rem; }
         .testi-loc { color: var(--accent-gold); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
 
-        /* AUDIBLE FAQ SECTION */
+        /* AUDIBLE FAQ SECTION - PERBAIKAN TOMBOL VOICE */
         .grid-2-faq { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; }
         .faq-item { background: var(--bg-surface); padding: 1.5rem; border: 1px solid var(--glass-border); border-radius: 8px; margin-bottom: 1.2rem; display: flex; gap: 1.2rem; align-items: flex-start; }
-        .voice-btn { flex-shrink: 0; background: transparent; border: 1px solid var(--accent-gold); border-radius: 50%; width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.3s; }
+        
+        .voice-btn { flex-shrink: 0; background: transparent; border: 1px solid var(--accent-gold); border-radius: 30px; padding: 0 15px; height: 45px; display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-main); font-weight: 600; cursor: pointer; transition: 0.3s; }
         .voice-btn svg { fill: var(--accent-gold); width: 20px; height: 20px; transition: 0.3s; }
-        .voice-btn.playing { background: var(--accent-gold); animation: pulse-gold 1.5s infinite; }
+        .voice-btn.playing { background: var(--accent-gold); color: var(--bg-dark); animation: pulse-gold 1.5s infinite; }
         .voice-btn.playing svg { fill: var(--bg-dark); }
+        
         @keyframes pulse-gold { 0% { box-shadow: 0 0 0 0 rgba(220, 182, 111, 0.4); } 70% { box-shadow: 0 0 0 12px rgba(220, 182, 111, 0); } 100% { box-shadow: 0 0 0 0 rgba(220, 182, 111, 0); } }
 
         /* PRICING NEXUS CARD */
@@ -200,7 +195,7 @@
         footer { padding: 4rem 5% 2rem; background: #040507; border-top: 1px solid var(--glass-border); }
         .tags-box { border: 1px dashed rgba(255, 255, 255, 0.08); padding: 1.5rem; font-size: 0.8rem; opacity: 0.6; border-radius: 8px; line-height: 1.7; }
         
-        /* AGENCY CREDIT STYLING (Spesifikasi Siluman Master Sutato) */
+        /* AGENCY CREDIT STYLING (Spesifikasi Siluman) */
         .agency-credit { text-align: center; margin-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; }
         .agency-credit-l1 { color: #475569; font-size: 0.9rem; margin-bottom: 0.3rem; }
         .agency-credit-l2 { color: #334155; font-size: 0.85rem; }
@@ -221,6 +216,8 @@
             .grid-2-faq { grid-template-columns: 1fr; gap: 2rem; }
             .glass-panel-form { padding: 2rem 1.5rem; }
             section { padding: 4rem 1.2rem; }
+            /* Penyesuaian responsif tombol voice di mobile */
+            .voice-btn { width: auto; padding: 0 12px; }
         }
     </style>
 </head>
@@ -385,7 +382,8 @@
             <!-- FAQ 1 -->
             <div class="faq-item">
                 <button class="voice-btn" data-text="Kami sedang mengadakan Flash Sale! Cukup bayar satu setengah juta rupiah per orang untuk perjalanan lima hari dua malam. Harga ini sangat terbatas, segera amankan seat Anda sebelum kehabisan kuota." aria-label="Putar Jawaban">
-                    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> 🔊 Dengarkan
+                    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> 
+                    <span>Dengarkan</span>
                 </button>
                 <div style="margin-left: 1rem; width: 100%;">
                     <h3 style="font-size: 1.05rem; margin-bottom: 0.3rem;">Berapa harga promo Paket Tour Jogja Bali saat ini?</h3>
@@ -396,7 +394,8 @@
             <!-- FAQ 2 -->
             <div class="faq-item">
                 <button class="voice-btn" data-text="Sama sekali tidak ada! Sistem kami adalah all inclusive. Biaya tersebut sudah mencakup transportasi bus mewah, penginapan hotel, makan, biaya penyeberangan, hingga tiket masuk semua destinasi wisata." aria-label="Putar Jawaban">
-                    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> 🔊 Dengarkan
+                    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> 
+                    <span>Dengarkan</span>
                 </button>
                 <div style="margin-left: 1rem; width: 100%;">
                     <h3 style="font-size: 1.05rem; margin-bottom: 0.3rem;">Apakah ada biaya tersembunyi di luar Rp 1,5 Juta?</h3>
@@ -407,7 +406,8 @@
             <!-- FAQ 3 -->
             <div class="faq-item">
                 <button class="voice-btn" data-text="Titik kumpul utama kami tersebar di wilayah D.I.Yogyakarta seperti Jogja, Sleman, Bantul, dan juga Jawa Tengah meliputi Solo, Semarang, Magelang, Klaten, hingga Purwokerto." aria-label="Putar Jawaban">
-                    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> 🔊 Dengarkan
+                    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> 
+                    <span>Dengarkan</span>
                 </button>
                 <div style="margin-left: 1rem; width: 100%;">
                     <h3 style="font-size: 1.05rem; margin-bottom: 0.3rem;">Dari kota mana saja keberangkatan trip ini?</h3>
@@ -418,7 +418,8 @@
             <!-- FAQ 4 -->
             <div class="faq-item">
                 <button class="voice-btn" data-text="Anda akan menikmati perjalanan nyaman dengan armada bus pariwisata eksekutif terbaru yang full AC, didampingi tour guide profesional, menginap di hotel berbintang, dan layanan dokumentasi wisata lengkap." aria-label="Putar Jawaban">
-                    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> 🔊 Dengarkan
+                    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> 
+                    <span>Dengarkan</span>
                 </button>
                 <div style="margin-left: 1rem; width: 100%;">
                     <h3 style="font-size: 1.05rem; margin-bottom: 0.3rem;">Fasilitas apa saja yang didapatkan peserta tour?</h3>
@@ -429,7 +430,8 @@
             <!-- FAQ 5 -->
             <div class="faq-item">
                 <button class="voice-btn" data-text="Destinasi yang kami susun super lengkap. Mulai dari mengagumi pesona Candi, menikmati indahnya Sawah Terasering, bersantai di Pantai Pasir Putih, hingga ditutup dengan Dinner Seafood romantis di pinggir pantai Jimbaran." aria-label="Putar Jawaban">
-                    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> 🔊 Dengarkan
+                    <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg> 
+                    <span>Dengarkan</span>
                 </button>
                 <div style="margin-left: 1rem; width: 100%;">
                     <h3 style="font-size: 1.05rem; margin-bottom: 0.3rem;">Destinasi wisata mana saja yang dikunjungi?</h3>
